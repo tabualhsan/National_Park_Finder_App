@@ -1,5 +1,5 @@
 import React from 'react'
-
+import style from './park.module.css';
 const Park = ({ data }) => {
 
 return(
