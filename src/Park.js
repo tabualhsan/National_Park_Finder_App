@@ -1,12 +1,11 @@
 import React from 'react'
 
-const Park = ({data, description,title}) => {
+const Park = ({ data }) => {
 
 return(
     <div className="parks">
-        
-        <h1>{title}</h1>
-        <p>{description}</p>
+        <h1>{data.fullName}</h1>
+        <p>{data.description}</p>
     </div>
     );
 }
