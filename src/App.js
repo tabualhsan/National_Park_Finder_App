@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import Park from './Park';
 import './App.css';
-
+import Button from 'react-bootstrap/Button'
 const App = () => {
 
   // const api_key = 'EW43splo4ni8vWJ6oN2cJunf49yeRxy6IFk4aOTb';
   const api_key = 'iBIDgu279HOLibT9B72MGBhW3NOT8PIbD92dfSIr';
   const [search, setSearch] = useState('');
   const [parks, setParks] = useState([]);
+
 
   useEffect(() => {
     getParks();
@@ -26,19 +27,37 @@ const App = () => {
     setSearch(e.target.value);
   }
 
+  const getSearch = e =>{
+
+    e.preventDefault();
+    setParks(search);
+    getSearch('');
+
+  };
+
+ 
   return (
     <div className="App">
-      <form  className="search-form">
+      <form onSubmit={getSearch} className="search-form">
         <input className='seach-bar' type='text' value={search} onChange={updatedSearch}/>
         <button className="search-button" type="submit"> Search Park </button>
       </form>
 
       <div className="park-description">
-        {parks.map(park => (
-          <Park data={park} />
+        {parks.map((park,idx,images, weatherInfo) => (
+          <Park 
+          key={idx}
+          data={park} 
+          image={park.images[0].url}
+          weather={park.weatherInfo}
+          />
+          
         ))}
+      
       </div>
     </div>
+        
+  
   );
  };
 

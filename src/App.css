@@ -1,44 +1,70 @@
+
 .App {
-  text-align: center;
-  min-height: 100vh;
-  background-image: linear-gradient(to top, #e6b980 0%, #eacda3 100%);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-position: center;
+  background:linear-gradient(rgba(61, 57, 57, 0.8),rgba(0,0,0,.8)),url("./images/denali-national-park.jpg");
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: block;
+  
+  
+
 }
 
 .search-form{
+  margin-top: 0%;
   min-height: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin:0 rem ;
 
 
 }
 
 .search-bar{
-  width: 50%;
-  border:none;
-  padding:10px;
-
+  width: 100%;
+  height: 100%;
+  font-size: 1.8rem;
+  padding-left: 1rem;
+  background: darkAqua;
+  border: none;
+  
+  
 }
 
 
 .search-button{
-  background-color: rgb(136, 120, 69);
-  border:none;
+  border:unset;
+  position: relative;
   padding-right: 10px 20px;
   color: white;
-
+  box-shadow: white;
+  display: inline-block;
+  min-width: fit-content;
+  height: 2.5rem;
+  margin: 0.5rem 0.2rem;
+  padding: 0.25rem 1rem;
+  border-radius: 0.3rem;
+  background: #535a3f;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  
 }
 
 
 .park-description{
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;
+  flex-direction: column-reverse;
   border-radius: 10px;
   box-shadow: 0px 5px 20px rgb(71,71,71);
   margin: 20px;
-  flex-direction: column;
-  background:white;
+  color: white;
   align-items:center;
   min-width: 40%;
 
