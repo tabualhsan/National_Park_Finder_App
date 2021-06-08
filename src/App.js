@@ -2,12 +2,17 @@ import React, {useEffect, useState} from 'react';
 import Park from './Park';
 import './App.css';
 import Button from 'react-bootstrap/Button'
+import { Dropdown } from 'semantic-ui-react'
+import DropdownButton from 'react-bootstrap/DropdownButton'
 const App = () => {
 
   // const api_key = 'EW43splo4ni8vWJ6oN2cJunf49yeRxy6IFk4aOTb';
   const api_key = 'iBIDgu279HOLibT9B72MGBhW3NOT8PIbD92dfSIr';
   const [search, setSearch] = useState('');
   const [parks, setParks] = useState([]);
+  const [displayParks, setDisplayParks] = useState([]);
+  const [state, setState] = useState("");
+  
 
 
   useEffect(() => {
@@ -21,19 +26,27 @@ const App = () => {
     const json = await response.json();
     console.log(json);
     setParks(json.data);
+    setDisplayParks(json.data);
   };
 
   const updatedSearch = e =>{
     setSearch(e.target.value);
   }
+  const filterParks = searchString =>{
 
+    
+    setDisplayParks(parks.filter(park => park.fullName.toLowerCase().includes(searchString.toLowerCase())))
+
+  }
   const getSearch = e =>{
 
     e.preventDefault();
-    setParks(search);
-    getSearch('');
+    filterParks(search)
 
   };
+  
+
+  
 
  
   return (
@@ -44,16 +57,30 @@ const App = () => {
       </form>
 
       <div className="park-description">
-        {parks.map((park,idx,images, weatherInfo) => (
+        {displayParks.map((park,idx,images, weatherInfo, states) => (
           <Park 
           key={idx}
           data={park} 
           image={park.images[0].url}
           weather={park.weatherInfo}
+          state={park.states}
           />
           
         ))}
-      
+{/* 
+      <Dropdown>
+      {/* <select className="custom-select" onChange={(e) =>{const selectedState=e.target.value;
+      setState(selectedState);
+      }}
+      > */}
+      {/* <select>
+        <option value="grapef">Grapefruit</option>
+        <option value="lime">Lime</option>
+        <option selected value="coconut">Coconut</option>
+        <option value="mango">Mango</option>
+      </select>
+      {state}
+      </Dropdown> */} 
       </div>
     </div>
         
