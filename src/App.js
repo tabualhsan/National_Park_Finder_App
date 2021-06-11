@@ -1,8 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import Park from './Park';
 import './App.css';
-import Button from 'react-bootstrap/Button'
-import { Dropdown } from 'semantic-ui-react'
+import states from 'states-us';
+import SelectUSState from 'react-select-us-states';
+
+
+// import Button from 'react-bootstrap/Button'
+// import { Dropdown } from 'semantic-ui-react'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 const App = () => {
 
@@ -11,7 +15,7 @@ const App = () => {
   const [search, setSearch] = useState('');
   const [parks, setParks] = useState([]);
   const [displayParks, setDisplayParks] = useState([]);
-  const [state, setState] = useState("");
+  // const [state, setState] = useState("");
   
 
 
@@ -55,6 +59,12 @@ const App = () => {
         <input className='seach-bar' type='text' value={search} onChange={updatedSearch}/>
         <button className="search-button" type="submit"> Search Park </button>
       </form>
+    <div className="state-selection-box">
+      <p>
+        Select a state: <SelectUSState id="state" className="selectedState" />
+      </p>
+    </div>
+
 
       <div className="park-description">
         {displayParks.map((park,idx,images, weatherInfo, states) => (
@@ -67,20 +77,8 @@ const App = () => {
           />
           
         ))}
-{/* 
-      <Dropdown>
-      {/* <select className="custom-select" onChange={(e) =>{const selectedState=e.target.value;
-      setState(selectedState);
-      }}
-      > */}
-      {/* <select>
-        <option value="grapef">Grapefruit</option>
-        <option value="lime">Lime</option>
-        <option selected value="coconut">Coconut</option>
-        <option value="mango">Mango</option>
-      </select>
-      {state}
-      </Dropdown> */} 
+
+   
       </div>
     </div>
         

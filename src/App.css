@@ -2,13 +2,12 @@
 .App {
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  background-position: center;
-  background:linear-gradient(rgba(61, 57, 57, 0.8),rgba(0,0,0,.8)),url("./images/denali-national-park.jpg");
+  align-items: center; 
+  
   background-size:cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  display: block;
+  display: block; 
   
   
 
@@ -41,7 +40,7 @@
   border:unset;
   position: relative;
   padding-right: 10px 20px;
-  color: white;
+  color: black;
   box-shadow: white;
   display: inline-block;
   min-width: fit-content;
@@ -64,11 +63,18 @@
   border-radius: 10px;
   box-shadow: 0px 5px 20px rgb(71,71,71);
   margin: 20px;
-  color: white;
+  color: black;
   align-items:center;
   min-width: 40%;
 
 }
+.state-selection-box{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-position: center;
   
+}
+
 
   
