@@ -1,13 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import Park from './Park';
 import './App.css';
+import logo from './images/logo.png';
+import Header from './Header';
 import states from 'states-us';
 import SelectUSState from 'react-select-us-states';
+// import Navbar from './components/Navbar';
+import { Navbar } from 'react-bootstrap';
 
 
 // import Button from 'react-bootstrap/Button'
 // import { Dropdown } from 'semantic-ui-react'
 import DropdownButton from 'react-bootstrap/DropdownButton'
+import { Container } from 'react-bootstrap';
 const App = () => {
 
   // const api_key = 'EW43splo4ni8vWJ6oN2cJunf49yeRxy6IFk4aOTb';
@@ -54,7 +59,29 @@ const App = () => {
 
  
   return (
+
+ 
     <div className="App">
+      <Navbar bg="dark" variant="dark"
+
+        fixed="top">
+        <Navbar.Brand>
+          <img src={logo} />{'  '}
+
+          National Park Search 
+
+
+        </Navbar.Brand>
+
+      </Navbar>
+
+      <div className='content'>
+
+          
+
+
+      </div>
+
       <form onSubmit={getSearch} className="search-form">
         <input className='seach-bar' type='text' value={search} onChange={updatedSearch}/>
         <button className="search-button" type="submit"> Search Park </button>
@@ -64,7 +91,7 @@ const App = () => {
         Select a state: <SelectUSState id="state" className="selectedState" />
       </p>
     </div>
-
+   
 
       <div className="park-description">
         {displayParks.map((park,idx,images, weatherInfo, states) => (
@@ -77,6 +104,7 @@ const App = () => {
           />
           
         ))}
+      
 
    
       </div>
