@@ -6,7 +6,10 @@ import Header from './Header';
 import states from 'states-us';
 import SelectUSState from 'react-select-us-states';
 // import Navbar from './components/Navbar';
-import { Navbar } from 'react-bootstrap';
+import { Navbar, NavDropdown, Form, Button, FormControl,Nav} from 'react-bootstrap';
+import { BrowserRouter as Router, Route, Link, NavLink, Switch } from "react-router-dom";
+import Filter from './Filter';
+
 
 
 // import Button from 'react-bootstrap/Button'
@@ -73,49 +76,71 @@ const App = () => {
   //   filterStates(search)
   // };
  
-  return (
- 
- 
+  return ( 
+    
     <div className="App">
+<Router>
+  {/* Navbar  */}
       <Navbar bg="dark" variant="dark"
 
         fixed="top">
         <Navbar.Brand>
-          <img src={logo} />{'  '}
+          <img src={logo} 
+           alt=""
+           width="70"
+           height="70"
+           className="d-inline-block align-top"/>
+           {'  '}
 
           National Park Search 
-
-
+     
+          <Nav className="mr-auto">
+            <Nav.Link href="#home">Home</Nav.Link>
+            <Link exact to ='/'> Filter Search</Link>
+            <NavLink exact activeClassName="active" to="/Filter">Filter Search</NavLink>
+            <NavDropdown title="Filter Search" id="navbarScrollingDropdown">
+        
+              <NavDropdown.Item href="#state">State</NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
         </Navbar.Brand>
+         <Form inline onSubmit={getSearch} className="search-form">
+          <FormControl type='text' placeholder="Search Park" value={search} onChange={updatedSearch} className="mr-sm-2"/>
+          <Button className="search-button" variant="outline-light" type="submit"> Search</Button>
+        </Form>
+        
 
-      </Navbar>
+          </Navbar>
 
+            <Switch>
+              <Route path='/Filter' component={Filter}/>
+            </Switch>
+
+          </Router>
+  
+      
       <div className='content'>
 
           
-
-
       </div>
 
-      <form onSubmit={getSearch} className="search-form">
-        <input className='seach-bar' type='text' value={search} onChange={updatedSearch}/>
-        <button className="search-button" type="submit"> Search Park </button>
-      </form>
-    <div className="state-selection-box">
+      
+      <div className="state-selection-box">
       
         Select a state: <SelectUSState id="state" className="selectedState" type='text' onChange={onSelectChange}/>
       
-    </div>
+      </div>
    
 
       <div className="park-description">
-        {displayParks.map((park,idx,images, weatherInfo, states) => (
+        {displayParks.map((park,idx,images, weatherInfo, states, url) => (
           <Park 
           key={idx}
           data={park} 
           image={park.images[0]?.url}
           weather={park.weatherInfo}
           state={park.states}
+          park_url={park.url}
           />
           
         ))}
@@ -124,8 +149,7 @@ const App = () => {
    
       </div>
     </div>
-        
-  
+    
   );
  };
 
