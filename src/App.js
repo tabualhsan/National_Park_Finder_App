@@ -20,8 +20,7 @@ const App = () => {
   const [search, setSearch] = useState('');
   const [parks, setParks] = useState([]);
   const [displayParks, setDisplayParks] = useState([]);
-  // const [state, setState] = useState("");
-  
+ 
 
 
   useEffect(() => {
@@ -29,21 +28,25 @@ const App = () => {
   }, []);
 
   const getParks = async () => {
-    const response = await fetch(`https://developer.nps.gov/api/v1/parks?api_key=${api_key}`)
+    const response = await fetch(`https://developer.nps.gov/api/v1/parks?api_key=${api_key}&limit=500`)
     // const response = await fetch(`https://developer.nps.gov/api/v1/parks?parkCode=acad&api_key=${api_key}`)
     // const response = await fetch (`https://developer.nps.gov/api/v1/activities?id=hiking&q=q&limit=20&start=0&api_key=EW43splo4ni8vWJ6oN2cJunf49yeRxy6IFk4aOTb`)
     const json = await response.json();
     console.log(json);
     setParks(json.data);
     setDisplayParks(json.data);
+    
   };
 
+  // search by text box 
+  // updating search set 
   const updatedSearch = e =>{
     setSearch(e.target.value);
-  }
-  const filterParks = searchString =>{
+  };
 
-    
+  
+  const filterParks = searchString => {
+
     setDisplayParks(parks.filter(park => park.fullName.toLowerCase().includes(searchString.toLowerCase())))
 
   }
@@ -54,12 +57,24 @@ const App = () => {
 
   };
   
-
+// search by state 
   
 
+  const onSelectChange = stateCode =>{
+
+    console.log(stateCode);
+
+    setDisplayParks(parks.filter(park => park.states === stateCode))
+  };
+
+  
+  // const getStateSearch = e => {
+  //   e.preventDefault();
+  //   filterStates(search)
+  // };
  
   return (
-
+ 
  
     <div className="App">
       <Navbar bg="dark" variant="dark"
@@ -87,9 +102,9 @@ const App = () => {
         <button className="search-button" type="submit"> Search Park </button>
       </form>
     <div className="state-selection-box">
-      <p>
-        Select a state: <SelectUSState id="state" className="selectedState" />
-      </p>
+      
+        Select a state: <SelectUSState id="state" className="selectedState" type='text' onChange={onSelectChange}/>
+      
     </div>
    
 
@@ -98,7 +113,7 @@ const App = () => {
           <Park 
           key={idx}
           data={park} 
-          image={park.images[0].url}
+          image={park.images[0]?.url}
           weather={park.weatherInfo}
           state={park.states}
           />

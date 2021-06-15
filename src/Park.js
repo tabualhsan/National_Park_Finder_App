@@ -7,17 +7,17 @@ return(
 <div className="national-park-card">
 <Container >
     <Row >
-        <Col md={6}>
+        <Col >
             <Card className="mb-3">
             <Card.Body className={style.parks}>
             <Image 
-            src={data.images[0].url} 
+            src={data.images[0]?.url} 
             className="card-img-top" 
             alt={data.fullName}
             fluid/>
             <Card.Title>{data.fullName}</Card.Title>
             <h4> State Location: {data.states}</h4>
-            <Card.Text><p>{data.description} </p></Card.Text>
+            <Card.Text>{data.description}</Card.Text>
             {/* <p className= {style.weather}> Weather: {data.weatherInfo}</p> */}
             </Card.Body> 
             </Card>
