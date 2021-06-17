@@ -1,21 +1,25 @@
-import React, {useEffect, useState} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import Park from './Park';
 import './App.css';
 import logo from './images/logo.png';
 import Header from './Header';
 import states from 'states-us';
 import SelectUSState from 'react-select-us-states';
-// import Navbar from './components/Navbar';
-import { Navbar, NavDropdown, Form, Button, FormControl,Nav} from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Link, NavLink, Switch } from "react-router-dom";
+import Navbarselect from './Navbarselect';
+import Home from './Home';
 import Filter from './Filter';
+// import Navbar from './components/Navbar';
+import { Navbar, NavLink, NavDropdown, Form, Button, FormControl,Nav, Collection} from 'react-bootstrap';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 
+// import MainPage from "index";
 
 // import Button from 'react-bootstrap/Button'
 // import { Dropdown } from 'semantic-ui-react'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import { Container } from 'react-bootstrap';
+
 const App = () => {
 
   // const api_key = 'EW43splo4ni8vWJ6oN2cJunf49yeRxy6IFk4aOTb';
@@ -71,17 +75,14 @@ const App = () => {
   };
 
   
-  // const getStateSearch = e => {
-  //   e.preventDefault();
-  //   filterStates(search)
-  // };
+ 
  
   return ( 
     
     <div className="App">
-<Router>
+
   {/* Navbar  */}
-      <Navbar bg="dark" variant="dark"
+      {/* <Navbar bg="light" variant="dark"
 
         fixed="top">
         <Navbar.Brand>
@@ -92,37 +93,28 @@ const App = () => {
            className="d-inline-block align-top"/>
            {'  '}
 
-          National Park Search 
-     
-          <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Link exact to ='/'> Filter Search</Link>
-            <NavLink exact activeClassName="active" to="/Filter">Filter Search</NavLink>
-            <NavDropdown title="Filter Search" id="navbarScrollingDropdown">
+          National Park Search  */}
         
-              <NavDropdown.Item href="#state">State</NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-        </Navbar.Brand>
-         <Form inline onSubmit={getSearch} className="search-form">
+        
+       
+    {/* </Navbar>  */}
+        <>
+          <Router>
+            <Navbarselect/>
+            <Switch>
+              <Route path='/' exact component={Home}/>
+              <Route path='/filter' component={Filter}/>
+            </Switch>
+          </Router>
+
+        </>
+    
+
+
+        <Form inline onSubmit={getSearch} className="search-form">
           <FormControl type='text' placeholder="Search Park" value={search} onChange={updatedSearch} className="mr-sm-2"/>
           <Button className="search-button" variant="outline-light" type="submit"> Search</Button>
         </Form>
-        
-
-          </Navbar>
-
-            <Switch>
-              <Route path='/Filter' component={Filter}/>
-            </Switch>
-
-          </Router>
-  
-      
-      <div className='content'>
-
-          
-      </div>
 
       
       <div className="state-selection-box">
