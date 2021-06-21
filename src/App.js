@@ -8,6 +8,8 @@ import SelectUSState from 'react-select-us-states';
 import Navbarselect from './Navbarselect';
 import Home from './Home';
 import Filter from './Filter';
+import UsStates from './UsStates';
+import Submenu from './SubMenu';
 // import Navbar from './components/Navbar';
 import { Navbar, NavLink, NavDropdown, Form, Button, FormControl,Nav, Collection} from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -81,7 +83,6 @@ const App = () => {
     
     <div className="App">
 
-  {/* Navbar  */}
       {/* <Navbar bg="light" variant="dark"
 
         fixed="top">
@@ -93,17 +94,19 @@ const App = () => {
            className="d-inline-block align-top"/>
            {'  '}
 
-          National Park Search  */}
-        
+          National Park Search 
         
        
-    {/* </Navbar>  */}
+        </Navbar>
+         */}
+
         <>
           <Router>
             <Navbarselect/>
             <Switch>
               <Route path='/' exact component={Home}/>
               <Route path='/filter' component={Filter}/>
+              <Route path='/usStates' component={UsStates}/>
             </Switch>
           </Router>
 
