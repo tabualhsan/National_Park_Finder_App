@@ -13,7 +13,7 @@ import Submenu from './SubMenu';
 // import Navbar from './components/Navbar';
 import { Navbar, NavLink, NavDropdown, Form, Button, FormControl,Nav, Collection} from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import GoogleMap from './GoogleMap'
 
 // import MainPage from "index";
 
@@ -46,6 +46,10 @@ const App = () => {
     setDisplayParks(json.data);
     
   };
+
+  // const getActivities = async () => {
+  //   const response = await fetch(`https://developer.nps.gov/api/v1/activities?api_key=${api_key}&limit=500`)
+  // }
 
   // search by text box 
   // updating search set 
@@ -80,70 +84,59 @@ const App = () => {
  
  
   return ( 
+  <div className="App" > 
+    <Navbar bg="light" variant="dark"
+
+      fixed="top">
+      <Navbar.Brand>
+        <img src={logo} 
+          alt=""
+          width="70"
+          height="70"
+          className="d-inline-block align-top"/>
+          {'  '}
+      </Navbar.Brand>  
+      <Form inline onSubmit={getSearch} className="search-form">
+        <FormControl type='text' placeholder="Search Park" value={search} onChange={updatedSearch} className="mr-sm-2"/>
+        <Button className="search-button" variant="outline-light" type="submit"> Search</Button>
+      </Form>
+      <Form className="selectedState">
+        Select a state: <SelectUSState id="state"  type='text' onChange={onSelectChange}/>
+      </Form>
+      </Navbar>
+
+     
+
+
+    <div className="content">
+
+
+      <GoogleMap  containerStyle={{width: '100%', height: '100%', position: 'relative'}} />
+
+    </div>
+
+        <div className="park-description">
     
-    <div className="App">
+          {displayParks.map((park,idx,images, weatherInfo, states, url, latLong) => (
+            <Park 
+            key={idx}
+            data={park} 
+            image={park.images[0]?.url}
+            weather={park.weatherInfo}
+            state={park.states}
+            park_url={park.url}
+            direction={park.latLong}
 
-      {/* <Navbar bg="light" variant="dark"
-
-        fixed="top">
-        <Navbar.Brand>
-          <img src={logo} 
-           alt=""
-           width="70"
-           height="70"
-           className="d-inline-block align-top"/>
-           {'  '}
-
-          National Park Search 
-        
+            />
+            
+          ))}
+      
        
-        </Navbar>
-         */}
-
-        <>
-          <Router>
-            <Navbarselect/>
-            <Switch>
-              <Route path='/' exact component={Home}/>
-              <Route path='/filter' component={Filter}/>
-              <Route path='/usStates' component={UsStates}/>
-            </Switch>
-          </Router>
-
-        </>
-    
-
-
-        <Form inline onSubmit={getSearch} className="search-form">
-          <FormControl type='text' placeholder="Search Park" value={search} onChange={updatedSearch} className="mr-sm-2"/>
-          <Button className="search-button" variant="outline-light" type="submit"> Search</Button>
-        </Form>
-
-      
-      <div className="state-selection-box">
-      
-        Select a state: <SelectUSState id="state" className="selectedState" type='text' onChange={onSelectChange}/>
-      
-      </div>
-   
-
-      <div className="park-description">
-        {displayParks.map((park,idx,images, weatherInfo, states, url) => (
-          <Park 
-          key={idx}
-          data={park} 
-          image={park.images[0]?.url}
-          weather={park.weatherInfo}
-          state={park.states}
-          park_url={park.url}
-          />
-          
-        ))}
-      
-
-   
+  
       </div>
     </div>
+
+
     
   );
  };

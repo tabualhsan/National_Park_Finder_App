@@ -10,8 +10,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 .content{
-  margin-top:40px;
-  height:100px;
+  margin-top:100px;
+  height:200px;
   padding:12px;
   
 }
@@ -24,7 +24,7 @@
   font-size: 3rem;
 
 }
-.App {
+/* .App {
   display: flex;
   justify-content: space-around;
   align-items: center; 
@@ -36,22 +36,23 @@
   
   
 
-}
+} */
 
-.search-form{
+/* .search-form{
   margin-top: 0%;
-  min-height: 10vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   margin:0 rem ;
   position: relative;
   left: 500px;
+  margin-left: 20%;
 
 
-}
+} */
 
-.search-bar{
+/* .search-bar{
   width: 100%;
   height: 100%;
   font-size: 1.8rem;
@@ -60,9 +61,9 @@
   border: none;
   
   
-}
+} */
 
-
+/* 
 .search-button{
   border:unset;
   position: relative;
@@ -80,28 +81,69 @@
   font-weight: bold;
   border: none;
   
-}
+} */
 
+a.btn.btn-dark{
 
-.park-description{
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column-reverse;
-  border-radius: 10px;
-  box-shadow: 0px 5px 20px rgb(71,71,71);
-  margin: 20px;
-  color: black;
-  align-items:center;
-  min-width: 40%;
+ 
+  
 
 }
-.state-selection-box{
+/* .search-box{
   align-items: center;
-  display: flex;
-  justify-content: center;
-  background-position: center;
+  width: 100%;
+} */
+/* .selectedState{
+  width:100%;
+} */
+.google-maps{
+
   
 }
+/* .card{
+  align-items: center;
+  justify-content: center;
+  display:flex;
+
+} */
+.park-description{
+  /* display: grid; */
+  /* justify-content: space-around; */
+  /* flex-direction: column-reverse; */
+  /* border-radius: 10px; */
+  box-shadow: 0px 5px 20px rgb(71,71,71);
+  /* margin: 20px; */
+  color: black;
+  /* align-items:center; */
+  /* min-width: 40%; */
+
+} 
 
 
-  
+.card{
+  display: grid;
+
+
+}
+
+.content{
+  padding: 12px;
+  height:1000px;
+}
+
+.selectedState{
+  align-items: center;
+  text-align: center ;
+  /* margin-left: 50%; */
+ 
+}
+
+.googleMaps{
+
+  width: 50%;
+}
+
+const style = {
+  width: '50%';
+  height: '100%';
+}
