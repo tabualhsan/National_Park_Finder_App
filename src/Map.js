@@ -9,7 +9,7 @@ const Map = ({ location, center, zoom }) => {
     const [locationInfo, setLocationInfo] = useState(null)
 
     const markers = location.map(data => {{
-        return <LocationMarker lat={data.latitude} lng={data.longitude} onClick={() => setLocationInfo({image: data.image[0],title: data.fullName, location: data.states})}/>
+        return <LocationMarker lat={data.latitude} lng={data.longitude} onClick={() => setLocationInfo({title: data.fullName, location: data.states})}/>
             
         }
         return null
