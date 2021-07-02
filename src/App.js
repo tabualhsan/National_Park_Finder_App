@@ -10,15 +10,12 @@ import Home from './Home';
 import Filter from './Filter';
 import UsStates from './UsStates';
 import Submenu from './SubMenu';
-// import Navbar from './components/Navbar';
-import { Navbar, NavLink, NavDropdown, Form, Button, FormControl,Nav, Collection} from 'react-bootstrap';
+import { Navbar, NavLink, NavDropdown, Form, Button, FormControl, Nav, Collection} from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import GoogleMap from './GoogleMap'
+import Map from './Map';
+import Loader from './Loader'
 
-// import MainPage from "index";
 
-// import Button from 'react-bootstrap/Button'
-// import { Dropdown } from 'semantic-ui-react'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import { Container } from 'react-bootstrap';
 
@@ -29,8 +26,27 @@ const App = () => {
   const [search, setSearch] = useState('');
   const [parks, setParks] = useState([]);
   const [displayParks, setDisplayParks] = useState([]);
+  const [location, setLocation] = useState([])
+  const [loading, setLoading] = useState(false)
  
 
+  useEffect(() => {
+    const fetchEvents = async () => {
+      
+        setLoading(true)
+        const res = await fetch(`https://developer.nps.gov/api/v1/parks?api_key=${api_key}&limit=500`) 
+        const json  = await res.json()
+
+        setLocation(json.data)
+        setLoading(false)
+      }
+
+      fetchEvents()
+      console.log(setLocation);
+      
+    }, []) 
+
+    
 
   useEffect(() => {
     getParks();
@@ -38,8 +54,6 @@ const App = () => {
 
   const getParks = async () => {
     const response = await fetch(`https://developer.nps.gov/api/v1/parks?api_key=${api_key}&limit=500`)
-    // const response = await fetch(`https://developer.nps.gov/api/v1/parks?parkCode=acad&api_key=${api_key}`)
-    // const response = await fetch (`https://developer.nps.gov/api/v1/activities?id=hiking&q=q&limit=20&start=0&api_key=EW43splo4ni8vWJ6oN2cJunf49yeRxy6IFk4aOTb`)
     const json = await response.json();
     console.log(json);
     setParks(json.data);
@@ -47,12 +61,6 @@ const App = () => {
     
   };
 
-  // const getActivities = async () => {
-  //   const response = await fetch(`https://developer.nps.gov/api/v1/activities?api_key=${api_key}&limit=500`)
-  // }
-
-  // search by text box 
-  // updating search set 
   const updatedSearch = e =>{
     setSearch(e.target.value);
   };
@@ -100,8 +108,8 @@ const App = () => {
         <FormControl type='text' placeholder="Search Park" value={search} onChange={updatedSearch} className="mr-sm-2"/>
         <Button className="search-button" variant="outline-light" type="submit"> Search</Button>
       </Form>
-      <Form className="selectedState">
-        Select a state: <SelectUSState id="state"  type='text' onChange={onSelectChange}/>
+      <Form>
+        Select a state: <SelectUSState id="state" className="selectedState" type='text' onChange={onSelectChange}/>
       </Form>
       </Navbar>
 
@@ -111,8 +119,7 @@ const App = () => {
     <div className="content">
 
 
-      <GoogleMap  containerStyle={{width: '100%', height: '100%', position: 'relative'}} />
-
+    {!loading ? <Map location={location}/> :  <Loader /> }
     </div>
 
         <div className="park-description">

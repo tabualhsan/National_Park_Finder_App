@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card, Image, CardDeck, CardColumns} from 'react-bootstrap';
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn, MDBCardImage, MDBCardGroup, MDBRow, MDBCol} from 'mdb-react-ui-kit'
 
-const Park = ({ data, image, weather, state, park_url,idx, direction}) => {
+const Park = ({ data, image, weather, state, park_url,idx, location}) => {
 
 return(
 
@@ -24,7 +24,7 @@ return(
         <h8> State Location: {data.states}</h8>
         <Card.Text style={{textAlign:'center',fontSize: 11}}>{data.description}</Card.Text>
         <a  style={{width:250 ,backgroundColor:'#060b26',marginTop:20,}} href={data.url} className="btn btn-dark" type="submit">Learn More</a>
-        <a  style={{width:250 ,backgroundColor:'#060b26',marginTop:20,}}  className="btn btn-dark" type="submit">Directions</a>
+        <a  style={{width:250 ,backgroundColor:'#060b26',marginTop:20,}}  href={data.location} className="btn btn-dark" type="submit">Directions</a>
             </Card.Body>    
     </Card>
 </CardDeck>
