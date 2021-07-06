@@ -1,23 +1,13 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Park from './Park';
 import './App.css';
 import logo from './images/logo.png';
-import Header from './Header';
-import states from 'states-us';
 import SelectUSState from 'react-select-us-states';
-import Navbarselect from './Navbarselect';
-import Home from './Home';
-import Filter from './Filter';
-import UsStates from './UsStates';
-import Submenu from './SubMenu';
-import { Navbar, NavLink, NavDropdown, Form, Button, FormControl, Nav, Collection} from 'react-bootstrap';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Navbar, Form, Button, FormControl} from 'react-bootstrap';
 import Map from './Map';
 import Loader from './Loader'
-
-
-import DropdownButton from 'react-bootstrap/DropdownButton'
-import { Container } from 'react-bootstrap';
+import CardDeck from 'react-bootstrap/CardDeck';
+import data from '@iconify/icons-mdi/pine-tree';
 
 const App = () => {
 
@@ -26,27 +16,7 @@ const App = () => {
   const [search, setSearch] = useState('');
   const [parks, setParks] = useState([]);
   const [displayParks, setDisplayParks] = useState([]);
-  const [location, setLocation] = useState([])
-  const [loading, setLoading] = useState(false)
- 
-
-  useEffect(() => {
-    const fetchEvents = async () => {
-      
-        setLoading(true)
-        const res = await fetch(`https://developer.nps.gov/api/v1/parks?api_key=${api_key}&limit=500`) 
-        const json  = await res.json()
-
-        setLocation(json.data)
-        setLoading(false)
-      }
-
-      fetchEvents()
-      console.log(setLocation);
-      
-    }, []) 
-
-    
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     getParks();
@@ -58,6 +28,7 @@ const App = () => {
     console.log(json);
     setParks(json.data);
     setDisplayParks(json.data);
+    setLoading(false);
     
   };
 
@@ -79,7 +50,6 @@ const App = () => {
   };
   
 // search by state 
-  
 
   const onSelectChange = stateCode =>{
 
@@ -87,44 +57,39 @@ const App = () => {
 
     setDisplayParks(parks.filter(park => park.states === stateCode))
   };
-
-  
- 
- 
   return ( 
   <div className="App" > 
-    <Navbar bg="light" variant="dark"
+    <Navbar bg="dark" variant="light"
 
       fixed="top">
-      <Navbar.Brand>
-        <img src={logo} 
+      {/* <Navbar.Brand> */}
+        {/* <img src={logo} 
           alt=""
           width="70"
           height="70"
           className="d-inline-block align-top"/>
           {'  '}
-      </Navbar.Brand>  
-      <Form inline onSubmit={getSearch} className="search-form">
-        <FormControl type='text' placeholder="Search Park" value={search} onChange={updatedSearch} className="mr-sm-2"/>
-        <Button className="search-button" variant="outline-light" type="submit"> Search</Button>
-      </Form>
-      <Form>
-        Select a state: <SelectUSState id="state" className="selectedState" type='text' onChange={onSelectChange}/>
-      </Form>
-      </Navbar>
+      </Navbar.Brand>   */}
 
+      <Form inline onSubmit={getSearch} className="topnav">
+        <FormControl  type='text' placeholder="Search Park.." value={search} onChange={updatedSearch} />
+      </Form>
+      <Button className="search-button" variant="outline-light" type="submit"> <i class="fa fa-search"></i> </Button>
      
-
-
+    </Navbar>
+  
     <div className="content">
+    <Form style={{color:"black"}}>
+      Search By State:  
+        <SelectUSState id="state" className="selectedState" type='text' onChange={onSelectChange}/>
+      </Form>
 
-
-    {!loading ? <Map location={location}/> :  <Loader /> }
+    {!loading ? <Map location={displayParks}/> :  <Loader /> }
     </div>
 
-        <div className="park-description">
-    
-          {displayParks.map((park,idx,images, weatherInfo, states, url, latLong) => (
+    <div className="card-deck">
+      <CardDeck>
+          {displayParks.map((park, idx ) => (
             <Park 
             key={idx}
             data={park} 
@@ -133,15 +98,11 @@ const App = () => {
             state={park.states}
             park_url={park.url}
             direction={park.latLong}
-
-            />
-            
-          ))}
-      
-       
-  
-      </div>
+            />   
+          ))};
+      </CardDeck>
     </div>
+  </div>
 
 
     
