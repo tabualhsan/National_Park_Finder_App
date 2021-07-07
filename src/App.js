@@ -75,21 +75,25 @@ const App = () => {
         <FormControl  type='text' placeholder="Search Park.." value={search} onChange={updatedSearch} />
       </Form>
       <Button className="search-button" variant="outline-light" type="submit"> <i class="fa fa-search"></i> </Button>
-     
+    
+      <div  className="selectedState" >
+  
+       
+ 
+      </div>
     </Navbar>
   
     <div className="content">
-    <Form style={{color:"black"}}>
-      Search By State:  
-        <SelectUSState id="state" className="selectedState" type='text' onChange={onSelectChange}/>
-      </Form>
-
-    {!loading ? <Map location={displayParks}/> :  <Loader /> }
+    <h6><strong>Select by State:</strong> </h6>
+    <container>
+    <SelectUSState   className="selectedState"  placeholder="Search By State.." type='text' onChange={onSelectChange}/>
+    </container>
+    {!loading ? <Map location={displayParks} /> :  <Loader /> }
     </div>
 
-    <div className="card-deck">
-      <CardDeck>
-          {displayParks.map((park, idx ) => (
+    <div className="card-deck" >
+    <CardDeck>
+            {displayParks.map((park, idx ) => (
             <Park 
             key={idx}
             data={park} 
@@ -100,12 +104,9 @@ const App = () => {
             direction={park.latLong}
             />   
           ))};
-      </CardDeck>
+    </CardDeck>
     </div>
   </div>
-
-
-    
   );
  };
 
