@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import GoogleMapReact from 'google-map-react'
+import DirectionsRender from 'google-map-react'
 import LocationMarker from './LocationMarker'
 import LocationInfoBox from './LocationInfoBox'
 import './index.css'
@@ -8,11 +9,28 @@ import './index.css'
 const Map = ({ location, center, zoom }) => {
     const [locationInfo, setLocationInfo] = useState(null)
 
+    useEffect(() => {
+        const listener = e => {
+          if (e.key === "Escape") {
+            setLocationInfo(null);
+          }
+        };
+        window.addEventListener("keydown", listener);
+    
+        return () => {
+          window.removeEventListener("keydown", listener);
+        };
+      }, []);
+
     const markers = location.map(data => {{
         return <LocationMarker lat={data.latitude} lng={data.longitude} onClick={() => setLocationInfo({image: data.images[0]?.url, title: data.fullName, location: data.states, description:data.description, url:data.url, location:data.location})}/>
             
         }
+
+        
     })
+
+    
     return (
         <div className="map">
             <GoogleMapReact
