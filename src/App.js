@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import Park from './Park';
 import './App.css';
-import logo from './images/logo.png';
 import SelectUSState from 'react-select-us-states';
 import { Navbar, Form, Button, FormControl} from 'react-bootstrap';
 import Map from './Map';
 import Loader from './Loader'
 import CardDeck from 'react-bootstrap/CardDeck';
-import data from '@iconify/icons-mdi/pine-tree';
+
 
 const App = () => {
 
